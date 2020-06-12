@@ -1,6 +1,6 @@
 # FIRST
 
-1. With Python3+ [1], run `pip install`. You're also gonna need a `.env` file
+1. With Python3+*, run `pip install`. You're also gonna need a `.env` file
 2. Download a chromedriver for your OS type [here](https://chromedriver.chromium.org/downloads)
     - Make sure it matches your Chrome's version in the Chrome menu > Help > About Google Chrome
     - Remember the **path** of where you put the `chromedriver.exe` executable, unzipped
@@ -33,4 +33,4 @@ III. Pretend like I'm not decrementing these headers
 
   - world-script.py
 
-[1]: This was developed in Python v3.6.9
+*This was developed in Python v3.6.9
