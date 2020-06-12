@@ -1,6 +1,6 @@
 # FIRST
 
-1. Run `pip install`. You're also gonna need a `.env` file
+1. With Python3+ [1], run `pip install`. You're also gonna need a `.env` file
 2. Download a chromedriver for your OS type [here](https://chromedriver.chromium.org/downloads)
     - Make sure it matches your Chrome's version in the Chrome menu > Help > About Google Chrome
     - Remember the **path** of where you put the `chromedriver.exe` executable, unzipped
@@ -27,8 +27,10 @@ CHROME_DRIVER="/mnt/c/Program Files (x86)/Google/Chrome/Application/chromedriver
 
 III. Pretend like I'm not decrementing these headers
 
-# FOURTH
+# FOURTH, Finally
 
 - Just... just run the script. It'll use the configs, and step as appropriate
 
   - world-script.py
+
+[1]: This was developed in Python v3.6.9
