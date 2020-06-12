@@ -1,2 +1,9 @@
+# Files to ignore
 *.pyc
 *.env
+
+# python venv folder(s)
+dev/
+
+# export folder
+export*/
