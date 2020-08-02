@@ -6,6 +6,9 @@ load_dotenv()
 
 # Selenium Block
 from selenium import webdriver
+
+from selenium.webdriver.remote.webelement import WebElement
+
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -31,10 +34,58 @@ CHROME_DRIVER = getEnvVariable("CHROME_DRIVER", r"C:\Program Files (x86)\Google\
 driver = webdriver.Chrome(CHROME_DRIVER)
 
 try:
+
+    driver.maximize_window()
     driver.get(WEBSITE)
-    img_tag = WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located((By.TAG_NAME, "img")))
-    with open(os.path.join(END_FOLDER, 'filename.png'), 'wb') as file:
-        file.write(img_tag.screenshot_as_png)
+
+    # set initial perameters
+
+    seed = driver.find_element_by_name('seed')
+    seed.clear()
+    seed.send_keys('12971253')
+
+    projection = driver.find_element_by_xpath("//select[@name='projection']/option[@value='q']").click()
+
+    width = driver.find_element_by_name('width')
+    width.clear()
+    width.send_keys('500')
+
+    color = driver.find_element_by_xpath("//select[@name='colourmap']/option[@value='greyscale.col']").click()
+
+    height = driver.find_element_by_name('height')
+    height.clear()
+    height.send_keys('500')
+
+    zoom = driver.find_element_by_name('zoom')
+    zoom.clear()
+    zoom.send_keys('360')
+
+    water = driver.find_element_by_name('water')
+    water.clear()
+    water.send_keys('-0.035')
+
+    # loop through coordinates
+
+    Loop = 2
+
+    for y in range(Loop):
+        centLat = driver.find_element_by_name('lati')
+        centLat.clear()
+        centLat.send_keys(str(-2.5 - y))
+
+        for x in range(Loop):
+
+            centerLong = driver.find_element_by_name('longi')
+            centerLong.clear()
+            centerLong.send_keys(str(-102.5 + x))
+
+            submitButton = driver.find_element_by_xpath("//input[@type='submit' and @value='Make map']")
+            submitButton.submit()
+
+            img_tag = WebDriverWait(driver, 10).until(
+                 EC.presence_of_element_located((By.TAG_NAME, "img")))
+
+            with open(os.path.join(END_FOLDER, 'filename_' + str(x) + '_' + str(y) + '.png'), 'wb') as file:
+                file.write(img_tag.screenshot_as_png)
 finally:
     driver.quit()
